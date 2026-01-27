@@ -24,9 +24,10 @@ Font.register({
 const styles = StyleSheet.create({
   page: {
     fontFamily: "PT-Serif-Bold",
-    margin: 60,
+    padding: 40,
     fontSize: "13px",
     textTransform: "uppercase",
+    position: "relative",
   },
   title: { fontSize: "30px" },
   subtitle: {
@@ -51,15 +52,28 @@ const styles = StyleSheet.create({
   imagem: {
     width: 180,
     height: 150,
+    position: "absolute",
+    bottom: 560,
+    left: 360,
   },
 
-  section: {
-    display: "flex",
-    flexDirection: "row",
+  rodape: {
+    marginRight: 100,
+    marginBottom: 10,
+  },
+
+  assinatura: {
+    textAlign: "center",
   },
 });
 
-const Documento = ({ nomeCliente, areaConcretada }) => {
+const Documento = ({
+  nomeCliente,
+  areaConcretada,
+  servico,
+  responsavel,
+  preco,
+}) => {
   const [dataHoje, setDataHoje] = useState(new Date(Date.now()));
 
   const [diaHoje, setDiaHoje] = useState(0);
@@ -126,42 +140,52 @@ const Documento = ({ nomeCliente, areaConcretada }) => {
           <Text>(44) 99973-7827 / (44) 99973-7837</Text>
         </View>
 
-        <View style={styles.section}>
-          <View>
-            <Text style={styles.texto}>
-              MARINGÁ, {diaHoje} DE {mesExtenso} DE {anoAtual}
-            </Text>
+        <View>
+          <Text style={styles.texto}>
+            MARINGÁ, {diaHoje} DE {mesExtenso} DE {anoAtual}
+          </Text>
 
-            <Text style={styles.texto}>ORÇAMENTO DE PISO INDUSTRIAL</Text>
+          <Text style={styles.texto}>{servico}</Text>
 
-            <Text style={styles.texto}>ATT: {nomeCliente}</Text>
+          <Text style={styles.texto}>ATT: {nomeCliente}</Text>
 
-            <Text style={styles.texto}>
-              ÁREA A SER CONCRETADA: {areaConcretada} m²
-            </Text>
+          <Text style={styles.texto}>
+            ÁREA A SER CONCRETADA: {areaConcretada} m²
+          </Text>
 
-            <Text style={styles.texto}>MÃO DE OBRA:</Text>
+          <Text style={styles.texto}>MÃO DE OBRA:</Text>
 
-            <Text style={styles.textoNormal}>- COLOCAR LONA PLÁSTICA</Text>
-            <Text style={styles.textoNormal}>- MONTAR MALHA DE FERRO</Text>
-            <Text style={styles.textoNormal}>
-              - FAZER NIVELAMENTO COM LASER
-            </Text>
-            <Text style={styles.textoNormal}>
-              - LANÇAR O CONCRETO, POLIR E FAZER JUNTA DE DILATAÇÃO
-            </Text>
+          <Text style={styles.textoNormal}>- COLOCAR LONA PLÁSTICA</Text>
+          <Text style={styles.textoNormal}>- MONTAR MALHA DE FERRO</Text>
+          <Text style={styles.textoNormal}>- FAZER NIVELAMENTO COM LASER</Text>
+          <Text style={styles.textoNormal}>
+            - LANÇAR O CONCRETO, POLIR E FAZER JUNTA DE DILATAÇÃO
+          </Text>
 
-            <Text style={styles.textoNormal}></Text>
+          <Text style={styles.textoNormal}></Text>
 
-            <Text style={styles.texto}>MATERIAIS A SEREM CONCRETADOS: </Text>
+          <Text style={styles.texto}>MATERIAIS A SEREM CONCRETADOS: </Text>
 
-            <Text style={styles.textoNormal}>- CONCRETO 30 mpa COM BOMBA</Text>
-            <Text style={styles.textoNormal}>- TELA Q138</Text>
-            <Text style={styles.textoNormal}>- TRELIÇAS TG8</Text>
-            <Text style={styles.textoNormal}>- LONA PLÁSTICA</Text>
+          <Text style={styles.textoNormal}>- CONCRETO 30 mpa COM BOMBA</Text>
+          <Text style={styles.textoNormal}>- TELA Q138</Text>
+          <Text style={styles.textoNormal}>- TRELIÇAS TG8</Text>
+          <Text style={styles.textoNormal}>- LONA PLÁSTICA</Text>
 
-            <Text style={styles.texto}>PREÇO: </Text>
-          </View>
+          <Text style={styles.texto}>
+            PREÇO POR M²: R$ {Number(preco).toFixed(2)}
+          </Text>
+
+          <Text style={[styles.rodape, styles.texto]}>
+            A ESPECIALIZADA EM PISOS INDUSTRIAIS A MAIS DE 25 ANOS NO MERCADO
+            ATENDENDO MARINGÁ E REGIÃO.
+          </Text>
+
+          <Text style={styles.assinatura}>{responsavel}</Text>
+          <Text style={styles.assinatura}>GV PISOS INDUSTRIAIS</Text>
+        </View>
+
+        <View style={styles.imagem}>
+          <Image src={imgAlisadora} />
         </View>
       </Page>
     </Document>
