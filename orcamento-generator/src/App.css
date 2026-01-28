@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Coiny&family=Poppins:wght@100;400&family=Roboto+Flex:opsz,wght,XOPQ,XTRA,YOPQ,YTDE,YTFI,YTLC,YTUC@8..144,100..1000,96,468,79,-203,738,514,712&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Special+Gothic+Condensed+One&display=swap");
+
+#main {
+  background: #2d67bd;
+  background: linear-gradient(
+    90deg,
+    rgba(45, 103, 189, 1) 0%,
+    rgba(33, 104, 191, 1) 40%,
+    rgba(81, 143, 219, 1) 100%
+  );
+
+  font-family: "Roboto Flex";
+}
+
+.img-orcamento {
+  width: 30%;
+}
