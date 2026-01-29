@@ -134,20 +134,21 @@ const App = () => {
                 </div>
               </div>
 
-              <div className="mb-3">
-                <label htmlFor="area-concretada" className="form-label">
-                  Área a ser concretada (em m²)
-                </label>
-                <input
-                  type="number"
-                  className="form-control"
-                  id="area-concretada"
-                  onChange={(e) => setAreaConcretada(e.target.value)}
-                  value={areaConcretada}
-                  required={temArea === opcoes[0]}
-                  disabled={temArea === opcoes[1]}
-                ></input>
-              </div>
+              {temArea === opcoes[0] && (
+                <div className="mb-3">
+                  <label htmlFor="area-concretada" className="form-label">
+                    Área a ser concretada (em m²)
+                  </label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="area-concretada"
+                    onChange={(e) => setAreaConcretada(e.target.value)}
+                    value={areaConcretada}
+                    required={temArea === opcoes[0]}
+                  ></input>
+                </div>
+              )}
 
               <div className="mb-3">
                 <label>Tem mão de obra?</label>
@@ -187,53 +188,52 @@ const App = () => {
                 </div>
               </div>
 
-              <div className="mb-3">
-                <label htmlFor="">Itens da mão de obra</label>
-
-                <div className="input-group ">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Lançar concreto e polir"
-                    aria-label="Recipient’s username"
-                    aria-describedby="button-addon2"
-                    disabled={temMaoDeObra === opcoes[1]}
-                    value={itemMaoDeObra}
-                    onChange={(e) => setItemMaoDeObra(e.target.value)}
-                  />
-                  <button
-                    className="btn btn-outline-secondary"
-                    type="button"
-                    id="button-addon2"
-                    disabled={temMaoDeObra === opcoes[1]}
-                    onClick={() => {
-                      setMaoDeObra([
-                        ...maoDeObra,
-                        {
-                          id: idItemMOAtual.current++,
-                          nome: itemMaoDeObra,
-                        },
-                      ]);
-                      setItemMaoDeObra("");
-                    }}
-                  >
-                    Adicionar
-                  </button>
-                </div>
-
-                <div className="d-flex flex-wrap gap-2 mt-3">
-                  {maoDeObra.map((item) => (
-                    <div
-                      key={item.id}
-                      className="item-mao-de-obra d-flex bg-primary text-white p-2 rounded-3 gap-2"
-                      onClick={() => deleteItemMO(item.id)}
+              {temMaoDeObra === opcoes[0] && (
+                <div className="mb-3">
+                  <div className="input-group ">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Lançar concreto e polir"
+                      aria-label="Recipient’s username"
+                      aria-describedby="button-addon2"
+                      disabled={temMaoDeObra === opcoes[1]}
+                      value={itemMaoDeObra}
+                      onChange={(e) => setItemMaoDeObra(e.target.value)}
+                    />
+                    <button
+                      className="btn btn-outline-secondary"
+                      type="button"
+                      id="button-addon2"
+                      onClick={() => {
+                        setMaoDeObra([
+                          ...maoDeObra,
+                          {
+                            id: idItemMOAtual.current++,
+                            nome: itemMaoDeObra,
+                          },
+                        ]);
+                        setItemMaoDeObra("");
+                      }}
                     >
-                      <span className="">{item.nome}</span>
-                      <i className="bi bi-x-lg"></i>
-                    </div>
-                  ))}
+                      Adicionar
+                    </button>
+                  </div>
+
+                  <div className="d-flex flex-wrap gap-2 mt-3">
+                    {maoDeObra.map((item) => (
+                      <div
+                        key={item.id}
+                        className="item-mao-de-obra d-flex bg-primary text-white p-2 rounded-3 gap-2"
+                        onClick={() => deleteItemMO(item.id)}
+                      >
+                        <span className="">{item.nome}</span>
+                        <i className="bi bi-x-lg"></i>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               <div className="mb-3">
                 <label>Tem materiais?</label>
@@ -273,53 +273,54 @@ const App = () => {
                 </div>
               </div>
 
-              <div className="mb-3">
-                <label htmlFor="">Materiais a serem utilizados</label>
+              {temMateriais === opcoes[0] && (
+                <div className="mb-3">
+                  <label htmlFor="">Materiais a serem utilizados</label>
 
-                <div className="input-group ">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Concreto 30 MPA"
-                    aria-label="Recipient’s username"
-                    aria-describedby="button-addon2"
-                    disabled={temMateriais === opcoes[1]}
-                    value={itemMateriais}
-                    onChange={(e) => setItemMateriais(e.target.value)}
-                  />
-                  <button
-                    className="btn btn-outline-secondary"
-                    type="button"
-                    id="button-addon2"
-                    disabled={temMateriais === opcoes[1]}
-                    onClick={() => {
-                      setMateriais([
-                        ...materiais,
-                        {
-                          id: idItemMaterial.current++,
-                          nome: itemMateriais,
-                        },
-                      ]);
-                      setItemMateriais("");
-                    }}
-                  >
-                    Adicionar
-                  </button>
-                </div>
-
-                <div className="d-flex flex-wrap gap-2 mt-3">
-                  {materiais.map((item) => (
-                    <div
-                      key={item.id}
-                      className="item-material d-flex bg-primary text-white p-2 rounded-3 gap-2"
-                      onClick={() => deleteItemMaterial(item.id)}
+                  <div className="input-group ">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Concreto 30 MPA"
+                      aria-label="Recipient’s username"
+                      aria-describedby="button-addon2"
+                      disabled={temMateriais === opcoes[1]}
+                      value={itemMateriais}
+                      onChange={(e) => setItemMateriais(e.target.value)}
+                    />
+                    <button
+                      className="btn btn-outline-secondary"
+                      type="button"
+                      id="button-addon2"
+                      onClick={() => {
+                        setMateriais([
+                          ...materiais,
+                          {
+                            id: idItemMaterial.current++,
+                            nome: itemMateriais,
+                          },
+                        ]);
+                        setItemMateriais("");
+                      }}
                     >
-                      <span className="">{item.nome}</span>
-                      <i className="bi bi-x-lg"></i>
-                    </div>
-                  ))}
+                      Adicionar
+                    </button>
+                  </div>
+
+                  <div className="d-flex flex-wrap gap-2 mt-3">
+                    {materiais.map((item) => (
+                      <div
+                        key={item.id}
+                        className="item-material d-flex bg-primary text-white p-2 rounded-3 gap-2"
+                        onClick={() => deleteItemMaterial(item.id)}
+                      >
+                        <span className="">{item.nome}</span>
+                        <i className="bi bi-x-lg"></i>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               <div className="mb-3">
                 <div className="row gy-3">
@@ -359,22 +360,20 @@ const App = () => {
             </form>
           </div>
         </div>
-        <div className="col-12 col-md-6 border border-1 rounded-2 bg-body-tertiary p-2">
-          <div className="d-flex justify-content-center align-items-center h-100">
+        <div className="col-12 col-md-6">
+          <div className="d-flex justify-content-center align-items-center border border-1 rounded-2 bg-body-tertiary h-75 p-2">
             {showOrcamento ? (
-              <div className="d-flex justify-content-center h-100 w-100">
-                <PDFViewer className="w-100 h-100">
-                  <Documento
-                    nomeCliente={nomeCliente}
-                    areaConcretada={areaConcretada}
-                    servico={servico}
-                    maoDeObra={maoDeObra}
-                    materiais={materiais}
-                    preco={preco}
-                    responsavel={responsavel}
-                  ></Documento>
-                </PDFViewer>
-              </div>
+              <PDFViewer className="w-100 h-100">
+                <Documento
+                  nomeCliente={nomeCliente}
+                  areaConcretada={areaConcretada}
+                  servico={servico}
+                  maoDeObra={maoDeObra}
+                  materiais={materiais}
+                  preco={preco}
+                  responsavel={responsavel}
+                ></Documento>
+              </PDFViewer>
             ) : (
               <div className="d-flex justify-content-center flex-column align-items-center gap-2">
                 <img
