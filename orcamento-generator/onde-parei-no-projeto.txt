@@ -1,3 +1,2 @@
-- Eu já consegui colocar a adição de tags
-- Agora preciso conseguir remover as tags com o clique
-- E passar as tags adicionadas pro documento
+- Resolver o pepino de desativar os inputs depois que eles já tiverem sido preenchidos!
+- Quero limpar nesses casos

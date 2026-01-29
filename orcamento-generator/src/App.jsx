@@ -1,7 +1,7 @@
 import React from "react";
 import Documento from "./components/Documento";
 import { PDFViewer } from "@react-pdf/renderer";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./App.css";
 
 import imgOrcamento from "../public/img/icon-orcamento.png";
@@ -11,7 +11,7 @@ const App = () => {
 
   const [servico, setServico] = useState("");
   const [nomeCliente, setNomeCliente] = useState("");
-  const [areaConcretada, setAreaConcretada] = useState("");
+  const [areaConcretada, setAreaConcretada] = useState(0);
   const [responsavel, setResponsavel] = useState("");
   const [preco, setPreco] = useState(0);
   const [maoDeObra, setMaoDeObra] = useState([]);
@@ -26,11 +26,27 @@ const App = () => {
   const [temMaoDeObra, setTemMaoDeObra] = useState(opcoes[1]);
   const [temMateriais, setTemMateriais] = useState(opcoes[1]);
 
+  const idItemMOAtual = useRef(0);
+  const idItemMaterial = useRef(0);
+
+  const deleteItemMO = (id) => {
+    setMaoDeObra(maoDeObra.filter((item) => item.id != id));
+  };
+
+  const deleteItemMaterial = (id) => {
+    setMateriais(materiais.filter((item) => item.id != id));
+  };
+
   useEffect(() => {
     console.log("Tem area ", temArea);
     console.log("Tem M.O ", temMaoDeObra);
     console.log("Tem materiais ", temMateriais);
   }, [temArea, temMaoDeObra, temMateriais]);
+
+  useEffect(() => {
+    console.log(maoDeObra);
+    console.log(materiais);
+  }, [maoDeObra, materiais]);
 
   return (
     <div
@@ -48,7 +64,7 @@ const App = () => {
               }}
             >
               <div className="mb-3">
-                <div className="row d-flex align-items-end">
+                <div className="row gy-3 d-flex align-items-end">
                   <div className="col-12 col-sm-6">
                     <label htmlFor="servico" className="form-label">
                       Descrição do orçamento
@@ -81,62 +97,56 @@ const App = () => {
               </div>
 
               <div className="mb-3">
-                <div className="row">
-                  <div className="col-12 col-sm-6 mb-2">
-                    <label>Tem área a ser concretada?</label>
+                <label>Tem área a ser concretada?</label>
 
-                    <div className="form-check">
-                      <input
-                        className="form-check-input"
-                        type="radio"
-                        name="input-area"
-                        id="comArea"
-                        value={opcoes[0]}
-                        checked={temArea === opcoes[0]}
-                        onChange={(e) => {
-                          setTemArea(e.target.value);
-                        }}
-                      />
-                      <label className="form-check-label" htmlFor="comArea">
-                        {opcoes[0]}
-                      </label>
-                    </div>
-
-                    <div className="form-check">
-                      <input
-                        className="form-check-input"
-                        type="radio"
-                        name="input-area"
-                        id="semArea"
-                        value={opcoes[1]}
-                        checked={temArea === opcoes[1]}
-                        onChange={(e) => {
-                          setTemArea(e.target.value);
-                        }}
-                      />
-                      <label className="form-check-label" htmlFor="semArea">
-                        {opcoes[1]}
-                      </label>
-                    </div>
-                  </div>
-                  <div className="col-12 col-sm-6">
-                    <div>
-                      <label htmlFor="area-concretada" className="form-label">
-                        Área a ser concretada (em m²)
-                      </label>
-                      <input
-                        type="number"
-                        className="form-control"
-                        id="area-concretada"
-                        placeholder="200"
-                        onChange={(e) => setAreaConcretada(e.target.value)}
-                        value={areaConcretada}
-                        required={temArea === opcoes[0]}
-                        disabled={temArea === opcoes[1]}
-                      ></input>
-                    </div>
-                  </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="input-area"
+                    id="comArea"
+                    value={opcoes[0]}
+                    checked={temArea === opcoes[0]}
+                    onChange={(e) => {
+                      setTemArea(e.target.value);
+                    }}
+                  />
+                  <label className="form-check-label" htmlFor="comArea">
+                    {opcoes[0]}
+                  </label>
                 </div>
+
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="input-area"
+                    id="semArea"
+                    value={opcoes[1]}
+                    checked={temArea === opcoes[1]}
+                    onChange={(e) => {
+                      setTemArea(e.target.value);
+                    }}
+                  />
+                  <label className="form-check-label" htmlFor="semArea">
+                    {opcoes[1]}
+                  </label>
+                </div>
+              </div>
+
+              <div className="mb-3">
+                <label htmlFor="area-concretada" className="form-label">
+                  Área a ser concretada (em m²)
+                </label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id="area-concretada"
+                  onChange={(e) => setAreaConcretada(e.target.value)}
+                  value={areaConcretada}
+                  required={temArea === opcoes[0]}
+                  disabled={temArea === opcoes[1]}
+                ></input>
               </div>
 
               <div className="mb-3">
@@ -197,7 +207,13 @@ const App = () => {
                     id="button-addon2"
                     disabled={temMaoDeObra === opcoes[1]}
                     onClick={() => {
-                      setMaoDeObra([...maoDeObra, itemMaoDeObra]);
+                      setMaoDeObra([
+                        ...maoDeObra,
+                        {
+                          id: idItemMOAtual.current++,
+                          nome: itemMaoDeObra,
+                        },
+                      ]);
                       setItemMaoDeObra("");
                     }}
                   >
@@ -207,9 +223,13 @@ const App = () => {
 
                 <div className="d-flex flex-wrap gap-2 mt-3">
                   {maoDeObra.map((item) => (
-                    <div className="d-flex bg-primary text-white p-2 rounded-3 gap-2">
-                      <span className="">{item}</span>
-                      <i class="bi bi-x-lg"></i>
+                    <div
+                      key={item.id}
+                      className="item-mao-de-obra d-flex bg-primary text-white p-2 rounded-3 gap-2"
+                      onClick={() => deleteItemMO(item.id)}
+                    >
+                      <span className="">{item.nome}</span>
+                      <i className="bi bi-x-lg"></i>
                     </div>
                   ))}
                 </div>
@@ -273,7 +293,13 @@ const App = () => {
                     id="button-addon2"
                     disabled={temMateriais === opcoes[1]}
                     onClick={() => {
-                      setMateriais([...materiais, itemMateriais]);
+                      setMateriais([
+                        ...materiais,
+                        {
+                          id: idItemMaterial.current++,
+                          nome: itemMateriais,
+                        },
+                      ]);
                       setItemMateriais("");
                     }}
                   >
@@ -283,16 +309,20 @@ const App = () => {
 
                 <div className="d-flex flex-wrap gap-2 mt-3">
                   {materiais.map((item) => (
-                    <div className="d-flex bg-primary text-white p-2 rounded-3 gap-2">
-                      <span className="">{item}</span>
-                      <i class="bi bi-x-lg"></i>
+                    <div
+                      key={item.id}
+                      className="item-material d-flex bg-primary text-white p-2 rounded-3 gap-2"
+                      onClick={() => deleteItemMaterial(item.id)}
+                    >
+                      <span className="">{item.nome}</span>
+                      <i className="bi bi-x-lg"></i>
                     </div>
                   ))}
                 </div>
               </div>
 
               <div className="mb-3">
-                <div className="row">
+                <div className="row gy-3">
                   <div className="col-12 col-sm-6">
                     <label htmlFor="preco-m2" className="form-label">
                       Preço por m²
@@ -338,6 +368,8 @@ const App = () => {
                     nomeCliente={nomeCliente}
                     areaConcretada={areaConcretada}
                     servico={servico}
+                    maoDeObra={maoDeObra}
+                    materiais={materiais}
                     preco={preco}
                     responsavel={responsavel}
                   ></Documento>

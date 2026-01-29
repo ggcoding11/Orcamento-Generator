@@ -4,6 +4,14 @@
   font-family: "Roboto Flex";
 }
 
+.item-mao-de-obra {
+  cursor: pointer;
+}
+
+.item-material {
+  cursor: pointer;
+}
+
 .img-orcamento {
   width: 30%;
 }

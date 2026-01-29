@@ -71,6 +71,8 @@ const Documento = ({
   nomeCliente,
   areaConcretada,
   servico,
+  maoDeObra,
+  materiais,
   responsavel,
   preco,
 }) => {
@@ -149,27 +151,35 @@ const Documento = ({
 
           <Text style={styles.texto}>ATT: {nomeCliente}</Text>
 
-          <Text style={styles.texto}>
-            ÁREA A SER CONCRETADA: {areaConcretada} m²
-          </Text>
+          {areaConcretada > 0 && (
+            <Text style={styles.texto}>
+              ÁREA A SER CONCRETADA: {areaConcretada} m²
+            </Text>
+          )}
 
-          <Text style={styles.texto}>MÃO DE OBRA:</Text>
+          {maoDeObra.length > 0 && (
+            <View>
+              <Text style={styles.texto}>MÃO DE OBRA:</Text>
 
-          <Text style={styles.textoNormal}>- COLOCAR LONA PLÁSTICA</Text>
-          <Text style={styles.textoNormal}>- MONTAR MALHA DE FERRO</Text>
-          <Text style={styles.textoNormal}>- FAZER NIVELAMENTO COM LASER</Text>
-          <Text style={styles.textoNormal}>
-            - LANÇAR O CONCRETO, POLIR E FAZER JUNTA DE DILATAÇÃO
-          </Text>
+              {maoDeObra.map((item) => (
+                <Text style={styles.textoNormal}>
+                  - {item.nome.toUpperCase()}
+                </Text>
+              ))}
+            </View>
+          )}
 
-          <Text style={styles.textoNormal}></Text>
+          {materiais.length > 0 && (
+            <View>
+              <Text style={styles.texto}>MATERIAIS A SEREM UTILIZADOS:</Text>
 
-          <Text style={styles.texto}>MATERIAIS A SEREM CONCRETADOS: </Text>
-
-          <Text style={styles.textoNormal}>- CONCRETO 30 mpa COM BOMBA</Text>
-          <Text style={styles.textoNormal}>- TELA Q138</Text>
-          <Text style={styles.textoNormal}>- TRELIÇAS TG8</Text>
-          <Text style={styles.textoNormal}>- LONA PLÁSTICA</Text>
+              {materiais.map((item) => (
+                <Text style={styles.textoNormal}>
+                  - {item.nome.toUpperCase()}
+                </Text>
+              ))}
+            </View>
+          )}
 
           <Text style={styles.texto}>
             PREÇO POR M²: R$ {Number(preco).toFixed(2)}
