@@ -1,2 +1,1 @@
-- Ver se eu resolvi o problema que faltava
 - Ver se tem como eu trocar o value dos input por true/false
