@@ -75,6 +75,9 @@ const Documento = ({
   materiais,
   responsavel,
   preco,
+  temArea,
+  temMaoDeObra,
+  temMateriais,
 }) => {
   const [dataHoje, setDataHoje] = useState(new Date(Date.now()));
 
@@ -151,13 +154,13 @@ const Documento = ({
 
           <Text style={styles.texto}>ATT: {nomeCliente}</Text>
 
-          {areaConcretada > 0 && (
+          {temArea === "Sim" && (
             <Text style={styles.texto}>
               ÁREA A SER CONCRETADA: {areaConcretada} m²
             </Text>
           )}
 
-          {maoDeObra.length > 0 && (
+          {temMaoDeObra === "Sim" && (
             <View>
               <Text style={styles.texto}>MÃO DE OBRA:</Text>
 
@@ -169,7 +172,7 @@ const Documento = ({
             </View>
           )}
 
-          {materiais.length > 0 && (
+          {temMateriais === "Sim" && (
             <View>
               <Text style={styles.texto}>MATERIAIS A SEREM UTILIZADOS:</Text>
 

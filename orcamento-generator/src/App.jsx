@@ -11,9 +11,9 @@ const App = () => {
 
   const [servico, setServico] = useState("");
   const [nomeCliente, setNomeCliente] = useState("");
-  const [areaConcretada, setAreaConcretada] = useState(0);
+  const [areaConcretada, setAreaConcretada] = useState();
   const [responsavel, setResponsavel] = useState("");
-  const [preco, setPreco] = useState(0);
+  const [preco, setPreco] = useState();
   const [maoDeObra, setMaoDeObra] = useState([]);
   const [materiais, setMateriais] = useState([]);
 
@@ -361,7 +361,7 @@ const App = () => {
           </div>
         </div>
         <div className="col-12 col-md-6">
-          <div className="d-flex justify-content-center align-items-center border border-1 rounded-2 bg-body-tertiary h-75 p-2">
+          <div className="d-flex justify-content-center align-items-center border border-1 rounded-2 bg-body-tertiary h-100 p-2">
             {showOrcamento ? (
               <PDFViewer className="w-100 h-100">
                 <Documento
@@ -372,6 +372,9 @@ const App = () => {
                   materiais={materiais}
                   preco={preco}
                   responsavel={responsavel}
+                  temArea={temArea}
+                  temMaoDeObra={temMaoDeObra}
+                  temMateriais={temMateriais}
                 ></Documento>
               </PDFViewer>
             ) : (

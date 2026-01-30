@@ -1,2 +1,2 @@
-- Resolver o pepino de desativar os inputs depois que eles já tiverem sido preenchidos!
-- Quero limpar nesses casos
+- Ver se eu resolvi o problema que faltava
+- Ver se tem como eu trocar o value dos input por true/false
