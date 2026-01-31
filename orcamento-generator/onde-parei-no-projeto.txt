@@ -1,1 +1,2 @@
-- Fazer a adição de múltiplos orçamentos funcionar corretamente
+- Fazer com que o servico quebre de linha de ficar muito grande corretamente
+- Terminar o resto das tarefas

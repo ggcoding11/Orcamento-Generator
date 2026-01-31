@@ -7,7 +7,7 @@ import "./App.css";
 import imgOrcamento from "../public/img/icon-orcamento.png";
 
 const App = () => {
-  const [showOrcamento, setShowOrcamento] = useState(false);
+  const [showOrcamento, setShowOrcamento] = useState(true);
 
   const [nomeCliente, setNomeCliente] = useState("");
   const [responsavel, setResponsavel] = useState("");
@@ -44,11 +44,14 @@ const App = () => {
     setOrcamentos([
       ...orcamentos,
       {
-        servico: servico,
-        areaConcretada: areaConcretada,
-        preco: preco,
-        maoDeObra: maoDeObra,
-        materiais: materiais,
+        servico,
+        areaConcretada,
+        preco,
+        maoDeObra,
+        materiais,
+        temMaoDeObra,
+        temArea,
+        temMateriais,
       },
     ]);
 
@@ -57,6 +60,9 @@ const App = () => {
     setPreco("");
     setMaoDeObra([]);
     setMateriais([]);
+    setTemArea(opcoes[1]);
+    setTemMaoDeObra(opcoes[1]);
+    setTemMateriais(opcoes[1]);
   };
 
   const finalizarDocumento = () => {
@@ -408,15 +414,8 @@ const App = () => {
               <PDFViewer className="w-100 h-100">
                 <Documento
                   nomeCliente={nomeCliente}
-                  areaConcretada={areaConcretada}
-                  servico={servico}
-                  maoDeObra={maoDeObra}
-                  materiais={materiais}
-                  preco={preco}
                   responsavel={responsavel}
-                  temArea={temArea}
-                  temMaoDeObra={temMaoDeObra}
-                  temMateriais={temMateriais}
+                  orcamentos={orcamentos}
                 ></Documento>
               </PDFViewer>
             ) : (

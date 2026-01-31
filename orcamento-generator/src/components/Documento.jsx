@@ -29,24 +29,36 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     position: "relative",
   },
+
   title: { fontSize: "30px" },
+
   subtitle: {
     textDecoration: "underline",
     fontSize: "22px",
   },
+
   telefone: {
     color: "red",
     fontSize: "12px",
     marginTop: 6,
   },
 
+  servico: {
+    width: "300px",
+  },
+
   texto: {
     paddingTop: 10,
     paddingBottom: 10,
+    border: "1px solid red",
   },
 
   textoNormal: {
     fontFamily: "PT-Serif",
+  },
+
+  orcamento: {
+    paddingBottom: 10,
   },
 
   imagem: {
@@ -67,18 +79,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Documento = ({
-  nomeCliente,
-  areaConcretada,
-  servico,
-  maoDeObra,
-  materiais,
-  responsavel,
-  preco,
-  temArea,
-  temMaoDeObra,
-  temMateriais,
-}) => {
+const Documento = ({ nomeCliente, responsavel, orcamentos }) => {
   const [dataHoje, setDataHoje] = useState(new Date(Date.now()));
 
   const [diaHoje, setDiaHoje] = useState(0);
@@ -145,49 +146,61 @@ const Documento = ({
           <Text>(44) 99973-7827 / (44) 99973-7837</Text>
         </View>
 
-        <View>
-          <Text style={styles.texto}>
+        <View style={styles.texto}>
+          <Text>
             MARINGÁ, {diaHoje} DE {mesExtenso} DE {anoAtual}
           </Text>
+        </View>
 
-          <Text style={styles.texto}>{servico}</Text>
+        <View style={styles.texto}>
+          <Text>ATT: {nomeCliente}</Text>
+        </View>
 
-          <Text style={styles.texto}>ATT: {nomeCliente}</Text>
-
-          {temArea === "Sim" && (
-            <Text style={styles.texto}>
-              ÁREA A SER CONCRETADA: {areaConcretada} m²
+        {orcamentos.map((orcamento) => (
+          <View style={styles.orcamento}>
+            <Text style={[styles.texto, styles.servico]}>
+              {orcamento.servico}
             </Text>
-          )}
 
-          {temMaoDeObra === "Sim" && (
-            <View>
-              <Text style={styles.texto}>MÃO DE OBRA:</Text>
-
-              {maoDeObra.map((item) => (
-                <Text style={styles.textoNormal}>
-                  - {item.nome.toUpperCase()}
+            {orcamento.temArea === "Sim" && (
+              <View>
+                <Text style={styles.texto}>
+                  ÁREA A SER CONCRETADA: {orcamento.areaConcretada} m²
                 </Text>
-              ))}
-            </View>
-          )}
+              </View>
+            )}
 
-          {temMateriais === "Sim" && (
-            <View>
-              <Text style={styles.texto}>MATERIAIS A SEREM UTILIZADOS:</Text>
+            {orcamento.temMaoDeObra === "Sim" && (
+              <View>
+                <Text style={styles.texto}>MÃO DE OBRA:</Text>
 
-              {materiais.map((item) => (
-                <Text style={styles.textoNormal}>
-                  - {item.nome.toUpperCase()}
-                </Text>
-              ))}
-            </View>
-          )}
+                {orcamento.maoDeObra.map((item) => (
+                  <Text style={styles.textoNormal}>
+                    - {item.nome.toUpperCase()}
+                  </Text>
+                ))}
+              </View>
+            )}
 
-          <Text style={styles.texto}>
-            PREÇO POR M²: R$ {Number(preco).toFixed(2)}
-          </Text>
+            {orcamento.temMateriais === "Sim" && (
+              <View>
+                <Text style={styles.texto}>MATERIAIS A SEREM UTILIZADOS:</Text>
 
+                {orcamento.materiais.map((item) => (
+                  <Text style={styles.textoNormal}>
+                    - {item.nome.toUpperCase()}
+                  </Text>
+                ))}
+              </View>
+            )}
+
+            <Text style={styles.texto}>
+              PREÇO POR M²: R$ {Number(orcamento.preco).toFixed(2)}
+            </Text>
+          </View>
+        ))}
+
+        <View>
           <Text style={[styles.rodape, styles.texto]}>
             A ESPECIALIZADA EM PISOS INDUSTRIAIS A MAIS DE 25 ANOS NO MERCADO
             ATENDENDO MARINGÁ E REGIÃO.
