@@ -1,2 +1,0 @@
-- Terminar de entender Regex e ver se eu consigo usar na formatação dos preços ou uso a biblioteca
-- Parei no exercício da senha forte do Regex

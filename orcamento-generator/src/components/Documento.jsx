@@ -193,7 +193,7 @@ const Documento = ({ nomeCliente, responsavel, orcamentos }) => {
                 {orcamento.formatoPreco === "Por m²"
                   ? "PREÇO POR M²"
                   : "PREÇO TOTAL"}
-                : R$ {Number(orcamento.preco).toFixed(2)}
+                : {orcamento.preco}
               </Text>
             </View>
           </View>

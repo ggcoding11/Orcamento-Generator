@@ -1,4 +1,5 @@
 import React from "react";
+import { NumericFormat } from "react-number-format";
 import Documento from "./components/Documento";
 import { PDFViewer } from "@react-pdf/renderer";
 import { useState, useEffect, useRef } from "react";
@@ -7,7 +8,7 @@ import "./App.css";
 import imgOrcamento from "../public/img/icon-orcamento.png";
 
 const App = () => {
-  const [showOrcamento, setShowOrcamento] = useState(true);
+  const [showOrcamento, setShowOrcamento] = useState(false);
 
   const [nomeCliente, setNomeCliente] = useState("");
   const [responsavel, setResponsavel] = useState("");
@@ -88,6 +89,10 @@ const App = () => {
     console.log(orcamentos);
   }, [orcamentos]);
 
+  useEffect(() => {
+    console.log(preco);
+  }, [preco]);
+
   return (
     <div
       className="container-fluid d-flex justify-content-center align-items-center min-vh-100"
@@ -139,8 +144,8 @@ const App = () => {
               <div className="mb-3">
                 <label>Tem área a ser concretada?</label>
 
-                {opcoes.map((opcao) => (
-                  <div className="form-check">
+                {opcoes.map((opcao, index) => (
+                  <div key={index} className="form-check">
                     <label className="form-check-label">
                       <input
                         className="form-check-input"
@@ -177,8 +182,8 @@ const App = () => {
               <div className="mb-3">
                 <label>Tem mão de obra?</label>
 
-                {opcoes.map((opcao) => (
-                  <div className="form-check">
+                {opcoes.map((opcao, index) => (
+                  <div key={index} className="form-check">
                     <label className="form-check-label">
                       <input
                         className="form-check-input"
@@ -242,8 +247,8 @@ const App = () => {
               <div className="mb-3">
                 <label>Tem materiais?</label>
 
-                {opcoes.map((opcao) => (
-                  <div className="form-check">
+                {opcoes.map((opcao, index) => (
+                  <div key={index} className="form-check">
                     <label className="form-check-label">
                       <input
                         className="form-check-input"
@@ -310,8 +315,8 @@ const App = () => {
               <div className="mb-3">
                 <label>Qual será o preço?</label>
 
-                {opcoesPreco.map((opcao) => (
-                  <div className="form-check">
+                {opcoesPreco.map((opcao, index) => (
+                  <div key={index} className="form-check">
                     <label>
                       <input
                         className="form-check-input"
@@ -337,14 +342,19 @@ const App = () => {
                         ? "Preço por m²"
                         : "Preço total"}
                     </label>
-                    <input
-                      type="number"
+
+                    <NumericFormat
                       className="form-control"
-                      id="preco"
-                      onChange={(e) => setPreco(e.target.value)}
                       value={preco}
+                      onValueChange={(value) => setPreco(value.formattedValue)}
+                      allowNegative={false}
+                      fixedDecimalScale={true}
+                      decimalSeparator=","
+                      decimalScale={2}
+                      prefix={"R$ "}
+                      placeholder="R$ 0,00"
                       required
-                    ></input>
+                    />
                   </div>
                   <div className="col-12 col-sm-6">
                     <label htmlFor="responsavel" className="form-label">
