@@ -12,7 +12,7 @@ import {
 
 import PTSerif from "../fonts/PTSerif-Regular.ttf";
 import PTSerifBold from "../fonts/PTSerif-Bold.ttf";
-import imgAlisadora from "../assets/photos/alisadora.jpg";
+import imgAlisadora from "../../public/img/alisadora.jpg";
 
 Font.register({ family: "PT-Serif", src: PTSerif, fontWeight: "normal" });
 Font.register({
