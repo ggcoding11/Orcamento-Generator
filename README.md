@@ -34,8 +34,8 @@ O arquivo será baixado automaticamente e uma prévia do mesmo aparecerá na tel
 
 ## 💻 Funcionalidades
 
-* Criação de documentos em PDF a partir do React (![React-PDF](https://react-pdf.org/))
-* Design responsivo (![Bootstrap](https://getbootstrap.com/))
+* Criação de documentos em PDF a partir do React ([React-PDF](https://react-pdf.org/))
+* Design responsivo ([Bootstrap](https://getbootstrap.com/))
 
 ## 🔗 Deployment
 
