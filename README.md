@@ -28,7 +28,7 @@ Esse projeto foi pensado especificamente para a empresa GV Pisos, baseando-se no
 A aplicação possui diversos campos para a criação do orçamento da maneira que preferir. Além disso, é possível ter
 vários orçamentos para o mesmo cliente no mesmo arquivo.
 
-Quando terminar de adicionar o(s) orçamento(s), basta clicar no botão "Finalizar documento". 
+Quando terminar de adicionar o(s) orçamento(s), basta clicar no botão "Finalizar orçamento". 
 
 O arquivo será baixado automaticamente e uma prévia do mesmo aparecerá na tela.
 
