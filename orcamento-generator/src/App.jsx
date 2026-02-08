@@ -1,8 +1,8 @@
 import React from "react";
+import { useState, useEffect, useRef } from "react";
 import { NumericFormat } from "react-number-format";
 import Documento from "./components/Documento";
 import { PDFViewer, PDFDownloadLink } from "@react-pdf/renderer";
-import { useState, useEffect, useRef } from "react";
 import "./App.css";
 
 import imgOrcamento from "../public/img/icon-orcamento.png";
@@ -45,7 +45,7 @@ const App = () => {
   };
 
   const adicionarOrcamento = () => {
-    alert("Orçamento foi adicionado com sucesso!")
+    alert("Orçamento foi adicionado com sucesso!");
 
     setOrcamentos([
       ...orcamentos,
@@ -78,25 +78,6 @@ const App = () => {
   const finalizarDocumento = () => {
     setShowOrcamento(true);
   };
-
-  useEffect(() => {
-    console.log("Tem area ", temArea);
-    console.log("Tem M.O ", temMaoDeObra);
-    console.log("Tem materiais ", temMateriais);
-  }, [temArea, temMaoDeObra, temMateriais]);
-
-  useEffect(() => {
-    console.log(maoDeObra);
-    console.log(materiais);
-  }, [maoDeObra, materiais]);
-
-  useEffect(() => {
-    console.log(orcamentos);
-  }, [orcamentos]);
-
-  useEffect(() => {
-    console.log(preco);
-  }, [preco]);
 
   return (
     <div
@@ -224,14 +205,16 @@ const App = () => {
                       className="btn btn-outline-secondary"
                       type="button"
                       onClick={() => {
-                        setMaoDeObra([
-                          ...maoDeObra,
-                          {
-                            id: idItemMOAtual.current++,
-                            nome: itemMaoDeObra,
-                          },
-                        ]);
-                        setItemMaoDeObra("");
+                        if (itemMaoDeObra !== "") {
+                          setMaoDeObra([
+                            ...maoDeObra,
+                            {
+                              id: idItemMOAtual.current++,
+                              nome: itemMaoDeObra,
+                            },
+                          ]);
+                          setItemMaoDeObra("");
+                        }
                       }}
                     >
                       Adicionar
@@ -291,14 +274,16 @@ const App = () => {
                       className="btn btn-outline-secondary"
                       type="button"
                       onClick={() => {
-                        setMateriais([
-                          ...materiais,
-                          {
-                            id: idItemMaterial.current++,
-                            nome: itemMateriais,
-                          },
-                        ]);
-                        setItemMateriais("");
+                        if (itemMateriais !== "") {
+                          setMateriais([
+                            ...materiais,
+                            {
+                              id: idItemMaterial.current++,
+                              nome: itemMateriais,
+                            },
+                          ]);
+                          setItemMateriais("");
+                        }
                       }}
                     >
                       Adicionar
