@@ -44,6 +44,32 @@ const App = () => {
     setMateriais(materiais.filter((item) => item.id != id));
   };
 
+  const addItemMO = () => {
+    if (itemMaoDeObra !== "") {
+      setMaoDeObra([
+        ...maoDeObra,
+        {
+          id: idItemMOAtual.current++,
+          nome: itemMaoDeObra,
+        },
+      ]);
+      setItemMaoDeObra("");
+    }
+  };
+
+  const addItemMaterial = () => {
+    if (itemMateriais !== "") {
+      setMateriais([
+        ...materiais,
+        {
+          id: idItemMaterial.current++,
+          nome: itemMateriais,
+        },
+      ]);
+      setItemMateriais("");
+    }
+  };
+
   const adicionarOrcamento = () => {
     alert("Orçamento foi adicionado com sucesso!");
 
@@ -200,22 +226,17 @@ const App = () => {
                       placeholder="Lançar concreto e polir"
                       value={itemMaoDeObra}
                       onChange={(e) => setItemMaoDeObra(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          addItemMO();
+                        }
+                      }}
                     />
                     <button
                       className="btn btn-outline-secondary"
                       type="button"
-                      onClick={() => {
-                        if (itemMaoDeObra !== "") {
-                          setMaoDeObra([
-                            ...maoDeObra,
-                            {
-                              id: idItemMOAtual.current++,
-                              nome: itemMaoDeObra,
-                            },
-                          ]);
-                          setItemMaoDeObra("");
-                        }
-                      }}
+                      onClick={addItemMO}
                     >
                       Adicionar
                     </button>
@@ -269,22 +290,17 @@ const App = () => {
                       disabled={temMateriais === opcoes[1]}
                       value={itemMateriais}
                       onChange={(e) => setItemMateriais(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          addItemMaterial();
+                        }
+                      }}
                     />
                     <button
                       className="btn btn-outline-secondary"
                       type="button"
-                      onClick={() => {
-                        if (itemMateriais !== "") {
-                          setMateriais([
-                            ...materiais,
-                            {
-                              id: idItemMaterial.current++,
-                              nome: itemMateriais,
-                            },
-                          ]);
-                          setItemMateriais("");
-                        }
-                      }}
+                      onClick={addItemMaterial}
                     >
                       Adicionar
                     </button>
@@ -413,7 +429,7 @@ const App = () => {
                       type="button"
                       onClick={finalizarDocumento}
                     >
-                      Finalizar orcamento
+                      Finalizar orçamento
                     </button>
                   </PDFDownloadLink>
                 )}
