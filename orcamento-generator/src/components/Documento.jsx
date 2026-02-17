@@ -164,29 +164,33 @@ const Documento = ({ nomeCliente, responsavel, orcamentos }) => {
               </Text>
             )}
 
-            {orcamento.temMaoDeObra === "Sim" && (
-              <View>
-                <Text style={styles.texto}>MÃO DE OBRA:</Text>
+            {orcamento.temMaoDeObra === "Sim" &&
+              orcamento.maoDeObra.length > 0 && (
+                <View>
+                  <Text style={styles.texto}>MÃO DE OBRA:</Text>
 
-                {orcamento.maoDeObra.map((item) => (
-                  <Text style={styles.textoNormal}>
-                    - {item.nome.toUpperCase()}
+                  {orcamento.maoDeObra.map((item) => (
+                    <Text style={styles.textoNormal}>
+                      - {item.nome.toUpperCase()}
+                    </Text>
+                  ))}
+                </View>
+              )}
+
+            {orcamento.temMateriais === "Sim" &&
+              orcamento.materiais.length > 0 && (
+                <View>
+                  <Text style={styles.texto}>
+                    MATERIAIS A SEREM UTILIZADOS:
                   </Text>
-                ))}
-              </View>
-            )}
 
-            {orcamento.temMateriais === "Sim" && (
-              <View>
-                <Text style={styles.texto}>MATERIAIS A SEREM UTILIZADOS:</Text>
-
-                {orcamento.materiais.map((item) => (
-                  <Text style={styles.textoNormal}>
-                    - {item.nome.toUpperCase()}
-                  </Text>
-                ))}
-              </View>
-            )}
+                  {orcamento.materiais.map((item) => (
+                    <Text style={styles.textoNormal}>
+                      - {item.nome.toUpperCase()}
+                    </Text>
+                  ))}
+                </View>
+              )}
 
             {orcamento.infoAdicionais.length > 0 && (
               <View>

@@ -71,7 +71,9 @@ const App = () => {
   };
 
   const adicionarOrcamento = () => {
-    alert("Orçamento foi adicionado com sucesso!");
+    alert(
+      "Orçamento foi adicionado com sucesso!\n Pode adicionar mais serviços ou finalizar o documento.",
+    );
 
     setOrcamentos([
       ...orcamentos,
@@ -125,6 +127,7 @@ const App = () => {
                   <div className="col-12 col-sm-6">
                     <label htmlFor="servico" className="form-label">
                       Descrição do orçamento
+                      <span className="text-danger ms-1">*</span>
                     </label>
                     <input
                       type="text"
@@ -140,6 +143,7 @@ const App = () => {
                   <div className="col-12 col-sm-6">
                     <label htmlFor="nome-att" className="form-label">
                       Aos cuidados de...
+                      <span className="text-danger ms-1">*</span>
                     </label>
                     <input
                       type="text"
@@ -351,6 +355,7 @@ const App = () => {
                       {formatoPreco === "Por m²"
                         ? "Preço por m²"
                         : "Preço total"}
+                      <span className="text-danger ms-1">*</span>
                     </label>
 
                     <NumericFormat
@@ -371,6 +376,7 @@ const App = () => {
                   <div className="col-12 col-sm-6">
                     <label htmlFor="responsavel" className="form-label">
                       Responsável
+                      <span className="text-danger ms-1">*</span>
                     </label>
                     <input
                       type="text"
